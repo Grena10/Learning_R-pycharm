@@ -1,0 +1,29 @@
+library (MASS)
+data(Boston)
+fix(Boston)
+names(Boston)
+attach (Boston)
+lm.fit=lm(medv~lstat) #simple linear regression
+lm.fit
+summary(lm.fit)
+coef(lm.fit)
+names(lm.fit)
+confint(lm.fit)
+#produce confidence intervals and prediction intervals for the prediction of medv for given value of lstat
+predict(lm.fit,data.frame(lstat=c(4,10,15)),interval = "prediction")
+
+plot(medv,lstat)
+abline (lm.fit,lwd=2)
+#abline(a,b) a - intercept, b - slope
+abline(30,-1,lwd=3,col="red")
+abline(20,-1,col="yellow",pch="+")
+
+par (mfrow =c(2 ,2))
+plot(lm.fit)
+res_lm = residuals(lm.fit)
+par (mfrow =c(1 ,2))
+plot(predict (lm.fit ), residuals (lm.fit ))
+plot(predict (lm.fit ), rstudent (lm.fit ))
+par (mfrow =c(1 ,1))
+plot(hatvalues(lm.fit))
+which.max(hatvalues (lm.fit))
