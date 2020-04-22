@@ -58,3 +58,44 @@ summary(lm_fit)
 confint(lm_fit)
 plot(lm_fit)
 plot(predict (lm_fit ), rstudent (lm_fit ))
+
+#t-statistic investigation
+rm(list=ls())
+set.seed(1)
+x=rnorm(100)
+y=2*x+rnorm(100)
+plot(x,y)
+par (mfrow =c(1 ,1))
+lm.fit=lm(y~x+0)
+summary(lm.fit)
+plot(x,y)
+abline(lm.fit)
+
+lmx.fit=lm(x~y)
+summary(lmx.fit)
+plot(y,x)
+abline(lmx.fit)
+
+n = length(x)
+t = sqrt(n - 1)*(x%*%y)/sqrt(sum(x^2)*sum(y^2) - (x%*%y)^2)
+
+x=rnorm(100)
+y=x
+
+lmx.fit=lm(x~y+0)
+summary(lmx.fit)
+
+#exercise 13
+set.seed(1)
+x = rnorm(100)
+eps = rnorm(100, sd = sqrt(0.25))
+y = -1 + 0.5*x + eps
+length(y)
+lm.fit=lm(y~x)
+summary(lm.fit)
+plot(x,y)
+abline(lm.fit,col="yellow")
+abline(-1,0.5,col="blue")
+legend("topleft", c("Least square", "Regression"),
+       col = c("yellow", "blue"), lty = c(1, 2))
+lm.fit2 = lm(y~x+I(x^2))
