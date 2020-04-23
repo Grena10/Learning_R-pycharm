@@ -99,3 +99,121 @@ abline(-1,0.5,col="blue")
 legend("topleft", c("Least square", "Regression"),
        col = c("yellow", "blue"), lty = c(1, 2))
 lm.fit2 = lm(y~x+I(x^2))
+summary(lm.fit2)
+plot(x,y)
+abline()
+#less noise
+set.seed(1)
+x = rnorm(100)
+eps = rnorm(100, sd = sqrt(0.01))
+y = -1 + 0.5*x + eps
+length(y)
+lm.fit=lm(y~x)
+summary(lm.fit)
+plot(x,y)
+abline(lm.fit,col="yellow")
+abline(-1,0.5,col="blue")
+legend("topleft", c("Least square", "Regression"),
+       col = c("yellow", "blue"), lty = c(1, 1))
+confint(lm.fit)
+
+#more noise
+set.seed(1)
+x = rnorm(100)
+plot(1:100, x)
+eps = rnorm(100, sd = sqrt(0.5))
+y = -1 + 0.5*x + eps
+length(y)
+lm.fit=lm(y~x)
+summary(lm.fit)
+plot(x,y)
+abline(lm.fit,col="yellow")
+abline(-1,0.5,col="blue")
+legend("topleft", c("Least square", "Regression"),
+       col = c("yellow", "blue"), lty = c(1, 1))
+
+confint(lm.fit)
+
+#collinearity problem
+set.seed(1)
+x1=runif(100)
+plot(1:100, x1)
+x2 =0.5 * x1 + rnorm (100) /10
+y = 2 + 2 * x1 +0.3 * x2 + rnorm (100)
+plot(x1,x2)
+lm.fit=lm(y~x1+x2)
+summary(lm.fit)
+plot(predict (lm.fit ), rstudent (lm.fit ))
+par (mfrow =c(2 ,2))
+plot(lm.fit)
+
+lmx1.fit=lm(y~x1)
+summary(lmx1.fit)
+plot(predict (lmx1.fit ), rstudent (lmx1.fit ))
+plot(lmx1.fit)
+
+lmx2.fit=lm(y~x2)
+summary(lmx2.fit)
+plot(predict (lmx2.fit ), rstudent (lmx2.fit ))
+plot(lmx2.fit)
+
+x1=c(x1 , 0.1)
+x2=c(x2 , 0.8)
+y=c(y ,6)
+
+plot(x1,y)
+
+#using Boston data for multiple linear regression
+library (MASS)
+data(Boston)
+attach(Boston)
+names(Boston)
+lm.fit = lm(crim~zn)
+summary(lm.fit)
+
+lm.fit = lm(crim~indus)
+summary(lm.fit)
+
+lm.fit = lm(crim~chas)
+summary(lm.fit)
+
+lm.fit = lm(crim~nox)
+summary(lm.fit)
+
+lm.fit = lm(crim~rm)
+summary(lm.fit)
+
+lm.fit = lm(crim~age)
+summary(lm.fit)
+
+lm.fit = lm(crim~dis)
+summary(lm.fit)
+
+lm.fit = lm(crim~rad)
+summary(lm.fit)
+plot(rad,crim)
+
+lm.fit = lm(crim~tax)
+summary(lm.fit)
+
+lm.fit = lm(crim~ptratio)
+summary(lm.fit)
+par (mfrow =c(1 ,1))
+plot(crim,ptratio)
+
+lm.fit = lm(crim~black)
+summary(lm.fit)
+
+lm.fit = lm(crim~lstat)
+summary(lm.fit)
+
+
+lm.fit = lm(crim~medv)
+summary(lm.fit)
+
+lm.fit = lm(crim~.,data = Boston)
+summary(lm.fit)
+
+coef_sin = c()
+coef_mul = c(0.45,-0.06,-0.749134, -10, -.43, 0,
+             -0.98,0.58,0,-0.27,0,0.12,-0.19)
