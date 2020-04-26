@@ -181,7 +181,8 @@ lm.fit = lm(crim~nox)
 summary(lm.fit)
 
 lm.fit = lm(crim~rm)
-summary(lm.fit)
+lm.fit2 = lm(crim~rm+I(rm^2)+I(rm^3))
+summary(lm.fit2)
 
 lm.fit = lm(crim~age)
 summary(lm.fit)
@@ -195,6 +196,8 @@ plot(rad,crim)
 
 lm.fit = lm(crim~tax)
 summary(lm.fit)
+lm.fit2 = lm(crim~tax+I(tax^2)+I(tax^3))
+summary(lm.fit2)
 
 lm.fit = lm(crim~ptratio)
 summary(lm.fit)
@@ -214,6 +217,8 @@ summary(lm.fit)
 lm.fit = lm(crim~.,data = Boston)
 summary(lm.fit)
 
-coef_sin = c()
+coef_sin = c(-0.07, 0.51,-1.89, 31.24, -2.7, 0.1,
+              -1.55, 0.61, 0.03,1.15, -0.03, 0.54, -0.36)
 coef_mul = c(0.45,-0.06,-0.749134, -10, -.43, 0,
              -0.98,0.58,0,-0.27,0,0.12,-0.19)
+plot(coef_mul,coef_sin)
