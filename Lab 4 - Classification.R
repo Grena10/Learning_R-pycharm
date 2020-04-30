@@ -132,3 +132,4 @@ table(glm.list,test.Y)
 
 glm.list[glm.pred>0.25] = "Yes"
 table(glm.list,test.Y)
+
