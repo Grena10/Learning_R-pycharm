@@ -1,0 +1,8 @@
+# Title     : TODO
+# Objective : TODO
+# Created by: grena
+# Created on: 5/2/2020
+
+library(ISLR)
+set.seed(1)
+train=sample(392,196)
