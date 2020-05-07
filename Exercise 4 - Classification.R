@@ -19,6 +19,7 @@ head(Weekly)
 cor(Weekly[,-9])
 plot(Volume)
 new_weekly = na.omit(Weekly)
+#logistics regression
 glm.fit=glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, data = Weekly, family=binomial)
 summary(glm.fit)
 glm.probs = predict(glm.fit,type ="response")
@@ -36,7 +37,6 @@ glm2.fits=glm(Direction ~  Lag2, data = Weekly, family=binomial,
     subset = train)
 summary(glm2.fits)
 glm2.probs=predict(glm2.fits,Weekly.2009,type="response")
-length(glm2.probs)
 glm2.pred=rep("Down",104)
 glm2.pred[glm2.probs > 0.5] = "Up"
 table(glm2.pred,Direction.2009)
